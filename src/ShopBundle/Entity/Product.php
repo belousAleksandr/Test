@@ -3,14 +3,20 @@
 namespace ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
+use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslation;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Product
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @Gedmo\TranslationEntity(class="ShopBundle\Entity\ProductTranslation")
  */
-class Product
+class Product extends AbstractPersonalTranslatable implements TranslatableInterface
 {
     /**
      * @var integer
@@ -23,6 +29,41 @@ class Product
 
 
     /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     * @Gedmo\Translatable
+     */
+    private $title;
+
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(name="description", type="text")
+     * @Gedmo\Translatable
+     */
+    private $description;
+
+    /**
+     * @ORM\OneToMany(
+     *     targetEntity="ShopBundle\Entity\ProductTranslation",
+     *  mappedBy="object",
+     *  cascade={"persist", "remove"}
+     * )
+     * @Assert\Valid(deep = true)
+     */
+    protected $translations;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -30,5 +71,84 @@ class Product
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Product
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Product
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Add translations
+     *
+     * @param  ProductTranslation $translations
+     * @return Product
+     */
+    public function addTranslation(AbstractPersonalTranslation $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param ProductTranslation $translations
+     */
+    public function removeTranslation(AbstractPersonalTranslation $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
     }
 }

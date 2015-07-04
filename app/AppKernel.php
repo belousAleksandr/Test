@@ -29,6 +29,8 @@ class AppKernel extends Kernel
 
             // Then add SonataAdminBundle
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),    // Check its existing or add
+            new Sonata\TranslationBundle\SonataTranslationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
