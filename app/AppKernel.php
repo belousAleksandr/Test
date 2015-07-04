@@ -31,6 +31,11 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),    // Check its existing or add
             new Sonata\TranslationBundle\SonataTranslationBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            //You need to add this dependency to make media functional
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
