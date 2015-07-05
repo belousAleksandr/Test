@@ -36,6 +36,14 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     private $title;
 
     /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @Gedmo\Translatable
+     */
+    private $name;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="description", type="text")
@@ -116,5 +124,27 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     public function getDescription()
     {
         return $this->description;
+    }
+
+    public function __toString() {
+        return $this->getId()? $this->getTitle(): 'New Property';
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Product
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
     }
 }

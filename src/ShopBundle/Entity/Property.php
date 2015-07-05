@@ -54,6 +54,16 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
     protected $translations;
 
 
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @Gedmo\Translatable
+     */
+    private $name;
+
+
     /**
      * Constructor
      */
@@ -114,5 +124,23 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Property
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
     }
 }
