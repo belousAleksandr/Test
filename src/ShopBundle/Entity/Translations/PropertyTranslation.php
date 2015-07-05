@@ -1,29 +1,29 @@
 <?php
-namespace ShopBundle\Entity;
+namespace ShopBundle\Entity\Translations;
 /**
  * Created by PhpStorm.
  * User: belous
- * Date: 26.06.15
- * Time: 20:48
+ * Date: 05.07.15
+ * Time: 9:52
  */
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslation;
 
 /**
- * Entity\Translation\ProductTranslation.php
+ * Entity\Translation\PropertyTranslation.php
 
  * @ORM\Entity
- * @ORM\Table(name="product_translations",
+ * @ORM\Table(name="property_translations",
  *   uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
  *     "locale", "object_id", "field"
  *   })}
  * )
  */
-class ProductTranslation extends AbstractPersonalTranslation {
+class PropertyTranslation extends AbstractPersonalTranslation {
 
     /**
-     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Product", inversedBy="translations")
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Property", inversedBy="translations")
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;

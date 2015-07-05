@@ -7,3 +7,21 @@ services:
             - ~
             - ShopBundle\Entity\Product
             - ~
+
+    shop.admin.category:
+        class: ShopBundle\Admin\CategoryAdmin
+        arguments: [~, ShopBundle\Entity\Category, ShopBundle:CategoryAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Category}
+
+    shop.admin.property:
+        class: ShopBundle\Admin\PropertyAdmin
+        arguments: [~, ShopBundle\Entity\Property, ShopBundle:PropertyAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Property}
+
+    shop.admin.page:
+        class: ShopBundle\Admin\PageAdmin
+        arguments: [~, ShopBundle\Entity\Page, ShopBundle:PageAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Page}

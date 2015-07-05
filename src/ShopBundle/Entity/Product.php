@@ -5,7 +5,6 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
-use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslation;
 use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity
- * @Gedmo\TranslationEntity(class="ShopBundle\Entity\ProductTranslation")
+ * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\ProductTranslation")
  */
 class Product extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -46,7 +45,7 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
 
     /**
      * @ORM\OneToMany(
-     *     targetEntity="ShopBundle\Entity\ProductTranslation",
+     *     targetEntity="ShopBundle\Entity\Translations\ProductTranslation",
      *  mappedBy="object",
      *  cascade={"persist", "remove"}
      * )
@@ -117,38 +116,5 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Add translations
-     *
-     * @param  ProductTranslation $translations
-     * @return Product
-     */
-    public function addTranslation(AbstractPersonalTranslation $translations)
-    {
-        $this->translations[] = $translations;
-
-        return $this;
-    }
-
-    /**
-     * Remove translations
-     *
-     * @param ProductTranslation $translations
-     */
-    public function removeTranslation(AbstractPersonalTranslation $translations)
-    {
-        $this->translations->removeElement($translations);
-    }
-
-    /**
-     * Get translations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTranslations()
-    {
-        return $this->translations;
     }
 }
