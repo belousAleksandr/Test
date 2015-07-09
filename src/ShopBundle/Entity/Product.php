@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity
  * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\ProductTranslation")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -30,24 +32,24 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=255)
      * @Gedmo\Translatable
+     * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
      * @var string $name
      *
-     * @ORM\Column(name="name", type="string", length=255)
      * @Gedmo\Translatable
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string $description
      *
-     * @ORM\Column(name="description", type="text")
      * @Gedmo\Translatable
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -61,6 +63,10 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
      */
     protected $translations;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
+     */
+    private $gallery;
 
     /**
      * Constructor
@@ -126,9 +132,40 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
         return $this->description;
     }
 
-    public function __toString() {
-        return $this->getId()? $this->getTitle(): 'New product';
+
+    /**
+     * @return mixed
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
+
+    /**
+     * @param mixed $gallery
+     * @return Property
+     */
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if (is_null($this->getGallery())) {
+            $gallery = new Gallery();
+            $gallery->setEnabled(true);
+            $gallery->setName($this->getName());
+            $gallery->setContext("default");
+            $gallery->setDefaultFormat("default_big");
+            $this->setGallery($gallery);
+        }
+    }
+
 
     /**
      * @return string
@@ -146,5 +183,12 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     {
         $this->name = $name;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return $this->getId()? $this->getTitle(): 'New product';
     }
 }

@@ -6,7 +6,7 @@ namespace ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
-use Sonata\TranslationBundle\Model\TranslatableInterface;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="ShopBundle\Entity\CategoryRepository")
- * @ORM\Entity
  * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\CategoryTranslation")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Category extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -66,6 +66,20 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     protected $translations;
 
     /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
+     */
+    private $gallery;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function getTitle()
@@ -102,12 +116,38 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     }
 
 
+
     /**
-     * Constructor
+     * @return mixed
      */
-    public function __construct()
+    public function getGallery()
     {
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->gallery;
+    }
+
+    /**
+     * @param mixed $gallery
+     * @return Property
+     */
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if (is_null($this->getGallery())) {
+            $gallery = new Gallery();
+            $gallery->setEnabled(true);
+            $gallery->setName($this->getName());
+            $gallery->setContext("default");
+            $gallery->setDefaultFormat("default_big");
+            $this->setGallery($gallery);
+        }
     }
 
 

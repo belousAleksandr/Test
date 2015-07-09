@@ -2,10 +2,11 @@
 
 namespace ShopBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
-use Sonata\TranslationBundle\Model\TranslatableInterface;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="ShopBundle\Entity\PropertyRepository")
  * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\PropertyTranslation")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Property extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -69,6 +71,10 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
      */
     private $name;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
+     */
+    private $gallery;
 
     /**
      * Constructor
@@ -149,6 +155,40 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param mixed $gallery
+     * @return Property
+     */
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        if (is_null($this->getGallery())) {
+            $gallery = new Gallery();
+            $gallery->setEnabled(true);
+            $gallery->setName($this->getName());
+            $gallery->setContext("default");
+            $gallery->setDefaultFormat("default_big");
+            $this->setGallery($gallery);
+        }
+    }
+
 
     /**
      * @return string

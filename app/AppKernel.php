@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
 
             // If you haven't already, add the storage bundle
             // This example uses SonataDoctrineORMAdmin but

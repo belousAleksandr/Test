@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslation;
 
 /**
- * Entity\Translation\PropertyTranslation.php
+ * Entity\Translation\CategoryTranslation.php
 
  * @ORM\Entity
  * @ORM\Table(name="category_translations",

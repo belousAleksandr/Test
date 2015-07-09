@@ -1,8 +1,8 @@
 services:
-    sonata.admin.post:
+    sonata.admin.product:
         class: ShopBundle\Admin\ProductAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Product", label: "Post" }
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Product }
         arguments:
             - ~
             - ShopBundle\Entity\Product
