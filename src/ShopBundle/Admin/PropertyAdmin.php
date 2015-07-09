@@ -49,6 +49,7 @@ class PropertyAdmin extends Admin
         $formMapper
             ->add('type')
             ->add('title')
+            ->add('name')
             ->add('description')
         ;
     }

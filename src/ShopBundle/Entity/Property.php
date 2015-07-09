@@ -121,14 +121,6 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
     }
 
     /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
      * Get id
      *
      * @return integer 
@@ -171,6 +163,24 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
     public function setGallery($gallery)
     {
         $this->gallery = $gallery;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Property
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
         return $this;
     }
 
