@@ -65,6 +65,42 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      */
     protected $translations;
 
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Category
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Category
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
 
     /**
      * Constructor
@@ -72,5 +108,10 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     public function __construct()
     {
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    public function __toString() {
+        return $this->getId()? $this->getTitle(): 'New Category';
     }
 }

@@ -47,7 +47,7 @@ class PropertyAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('id')
+            ->add('type')
             ->add('title')
             ->add('description')
         ;

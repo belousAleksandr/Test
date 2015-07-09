@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="ShopBundle\Entity\PropertyRepository")
+ * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\PropertyTranslation")
  */
 class Property extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -25,6 +26,11 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
      */
     protected $id;
 
+    /**
+     * @var string $type
+     *
+     * @ORM\Column(name="type", type="smallint", length=255)
+     */
     protected $type;
 
     /**
@@ -143,4 +149,12 @@ class Property extends AbstractPersonalTranslatable implements TranslatableInter
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString() {
+        return $this->getId()? $this->getName(): 'New property.';
+    }
+
 }

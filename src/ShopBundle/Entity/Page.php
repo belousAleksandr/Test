@@ -52,7 +52,7 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
 
     /**
      * @ORM\OneToMany(
-     *     targetEntity="ShopBundle\Entity\Translations\ProductTranslation",
+     *     targetEntity="ShopBundle\Entity\Translations\PageTranslation",
      *  mappedBy="object",
      *  cascade={"persist", "remove"}
      * )
@@ -130,6 +130,11 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
     {
         $this->mDescription = $mDescription;
         return $this;
+    }
+
+
+    public function __toString() {
+        return $this->getId()? $this->getName(): 'New page';
     }
 
 

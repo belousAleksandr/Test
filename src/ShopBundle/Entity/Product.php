@@ -127,7 +127,7 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     }
 
     public function __toString() {
-        return $this->getId()? $this->getTitle(): 'New Property';
+        return $this->getId()? $this->getTitle(): 'New product';
     }
 
     /**

@@ -15,16 +15,29 @@ class ProductAdmin extends Admin{
     {
         $formMapper
             ->add('title')
+            ->add('name')
             ->add('description');
     }
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(\Sonata\AdminBundle\Datagrid\DatagridMapper $datagridMapper)
     {
+
     }
 
     // Fields to be shown on lists
     protected function configureListFields(\Sonata\AdminBundle\Datagrid\ListMapper $listMapper)
     {
+        $listMapper
+            ->add('title')
+            ->add('name')
+            ->add('description')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'show' => array(),
+                    'edit' => array(),
+                    'delete' => array(),
+                )
+            ));
     }
 }
