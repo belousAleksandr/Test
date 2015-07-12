@@ -1,0 +1,7 @@
+{% set user = app.security.getToken().getUser() %}
+{% block user_block %}
+    <div class="pull-right">
+        {{ user.username }} |
+        <a href="{{ path('sonata_user_admin_security_logout') }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> {{ 'link_logout' | trans({}, "SonataUserBundle") }}</a>
+    </div>
+{% endblock %}
