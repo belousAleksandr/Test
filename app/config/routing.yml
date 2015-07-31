@@ -16,7 +16,7 @@ admin:
 _sonata_admin:
     resource: .
     type: sonata_admin
-    prefix: /admin/{_locale}/
+    prefix: /admin/{_locale}
     requirements:
         _locale: en|ru
 

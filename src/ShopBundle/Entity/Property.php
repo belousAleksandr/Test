@@ -19,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Property extends AbstractPersonalTranslatable implements TranslatableInterface
 {
+
+    const REPOSITORY = 'ShopBundle:Property';
     /**
      * @var integer
      *
