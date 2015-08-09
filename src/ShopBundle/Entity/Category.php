@@ -3,8 +3,10 @@
 namespace ShopBundle\Entity;
 
 
+use Application\Sonata\MediaBundle\Document\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Sonata\MediaBundle\Model\GalleryHasMedia;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
 use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Category extends AbstractPersonalTranslatable implements TranslatableInterface
 {
+    const REPOSITORY = 'ShopBundle\Entity\Category';
     /**
      * @var integer
      *
@@ -27,6 +30,13 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string $enabled
+     *
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    protected $enabled;
 
 
     /**
@@ -54,6 +64,14 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      * @Gedmo\Translatable
      */
     protected $description;
+
+    /**
+     * @var string $shortDescription
+     *
+     * @ORM\Column(name="short_description", type="text")
+     * @Gedmo\Translatable
+     */
+    protected $shortDescription;
 
     /**
      * @ORM\OneToMany(
@@ -115,10 +133,29 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
         return $this;
     }
 
+    /**
+     * @param string $locale
+     * @return null|string
+     */
+    public function getShortDescription($locale = 'ru')
+    {
+        return $this->getTranslation('shortDescription', $locale );
+    }
+
+    /**
+     * @param string $shortDescription
+     * @return Category
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+        return $this;
+    }
+
 
 
     /**
-     * @return mixed
+     * @return Gallery
      */
     public function getGallery()
     {
@@ -149,6 +186,41 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
             $this->setGallery($gallery);
         }
     }
+
+    /**
+     * @return null|\Sonata\MediaBundle\Model\MediaInterface
+     */
+    public function getFirstMedia() {
+        $gallery = $this->getGallery();
+        $galleryHasMedias = $gallery->getGalleryHasMedias();
+
+        /** @var GalleryHasMedia $galleryHasMedia */
+        $galleryHasMedia = $galleryHasMedias->first();
+        if($galleryHasMedia) {
+            return $galleryHasMedia->getMedia();
+        }
+
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param string $enabled
+     * @return Category
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
 
 
     public function __toString() {

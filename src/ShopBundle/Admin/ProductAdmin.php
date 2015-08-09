@@ -7,6 +7,7 @@ namespace ShopBundle\Admin;
  * Time: 20:57
  */
 
+use ShopBundle\Entity\Product;
 use Sonata\AdminBundle\Admin\Admin;
 
 class ProductAdmin extends Admin{

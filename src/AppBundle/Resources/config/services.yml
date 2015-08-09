@@ -1,4 +1,0 @@
-services:
-    app.manager.property:
-        class: AppBundle\Lib\Manager\PropertyManager
-        arguments: [@service_container]

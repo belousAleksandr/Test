@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    /**
+     * @return Category[]
+     */
+    public function findAllEnabled() {
+        return $this->findBy(array('enabled' => true));
+    }
 }

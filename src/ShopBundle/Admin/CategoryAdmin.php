@@ -28,7 +28,7 @@ class CategoryAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('id')
+            ->add('enabled')
             ->add('title')
             ->add('description')
             ->add('_action', 'actions', array(
@@ -47,8 +47,10 @@ class CategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('enabled')
             ->add('title')
             ->add('description')
+            ->add('shortDescription')
         ;
     }
 

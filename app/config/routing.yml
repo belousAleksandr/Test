@@ -1,24 +1,29 @@
 shop:
     resource: "@ShopBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    defaults: {_locale : ru}
+    requirements:
+        _locale: ua|ru
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
-
+root:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /%locale%/
+        permanent: true
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin/{_locale}
     requirements:
-                _locale: en|ru
+                _locale: ua|ru
 
 _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /admin/{_locale}
     requirements:
-        _locale: en|ru
+        _locale: ua|ru
 
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
@@ -28,24 +33,24 @@ media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
 # FOSUserBundle's routing
-fos_user_security:
-  resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-
-fos_user_profile:
-  resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-  prefix: /profile
-
-fos_user_register:
-  resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-  prefix: /register
-
-fos_user_resetting:
-  resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-  prefix: /resetting
-
-fos_user_change_password:
-  resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-  prefix: /profile
+#fos_user_security:
+#  resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+#
+#fos_user_profile:
+#  resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+#  prefix: /profile
+#
+#fos_user_register:
+#  resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+#  prefix: /register
+#
+#fos_user_resetting:
+#  resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+#  prefix: /resetting
+#
+#fos_user_change_password:
+#  resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+#  prefix: /profile
 
 # Admin's routing
 sonata_user:

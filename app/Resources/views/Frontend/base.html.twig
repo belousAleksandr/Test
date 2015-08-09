@@ -3,11 +3,77 @@
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('public/css/style.css') }}" type="text/css" media="all">
+    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
-{% block body %}{% endblock %}
+<header>
+    <div class="wrap">
+    <ul id ="header-nav-list">
+        <li><a href="{{ path('shop_homepage') }}">{{ 'Home page' | trans({}, 'frontend') }}</a></li>
+        <li><a href="{{ path('shop_categories') }}">{{ 'Categories' | trans({}, 'frontend') }}</a></li>
+        <li><a href="{{ path('shop_about_us') }}">{{ 'About us' | trans({}, 'frontend') }}</a></li>
+        <li><a href="{{ path('shop_contact_us') }}">{{ 'Contuct us' | trans({}, 'frontend') }}</a></li>
+    </ul>
+    </div>
+</header>
+
+
+{% block body %}
+    <div class="wrap wrap-gallery wrap-default-color first-block">
+        sdfsfd
+    </div>
+    <div class="wrap wrap-content wrap-default-color">
+        <h1>Саженцы плодовых деревьев</h1>
+
+        Питомник Гарди осуществляет поставку саженцев растений, клумбовых и комнатных цветов в крупнейшие
+        торговые сети Украины. В настоящий период мы активно расширяем ассортимент растений.
+
+    </div>
+    <div class="wrap top-categories wrap-default-color">
+    <div class="category-thumb">
+        <img class="item-img" src="{{ asset('green-garden.jpg') }}" alt=""/>
+        <div class="item-description">
+            <h2>Питомник декоративных растений</h2>
+            sdfsfsdfdsfsdf
+        </div>
+
+    </div>
+
+    <div class="category-thumb">
+        <img class="item-img" src="{{ asset('green-garden.jpg') }}" alt=""/>
+        <div class="item-description">
+            <h2>Питомник декоративных растений</h2>
+            sdfsfsdfdsfsdf
+        </div>
+
+    </div>
+
+    <div class="category-thumb">
+        <img class="item-img" src="{{ asset('green-garden.jpg') }}" alt=""/>
+        <div class="item-description">
+            <h2>Питомник декоративных растений</h2>
+            sdfsfsdfdsfsdf
+        </div>
+
+    </div>
+
+    <div class="category-thumb">
+        <img class="item-img" src="{{ asset('green-garden.jpg') }}" alt=""/>
+        <div class="item-description">
+            <h2>Питомник декоративных растений</h2>
+            sdfsfsdfdsfsdf
+        </div>
+
+    </div>
+    </div>{% endblock %}
+<footer>
+    <div class="wrap">
+
+    </div>
+</footer>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
