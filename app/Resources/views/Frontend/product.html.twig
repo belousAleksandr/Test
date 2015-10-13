@@ -1,1 +1,38 @@
 {% extends ':Frontend:base.html.twig' %}
+ {% block stylesheets %}
+     {{ parent() }}
+     <link rel="stylesheet" href="{{ asset('css/product.css') }}" type="text/css" media="all">
+ {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('js/simplGal.js') }}"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('.thumbnails').simpleGal({
+                mainImage: '.custom'
+            });
+        });
+</script>
+{% endblock %}
+
+{% block body %}
+    {% set gallery = product.gallery %}
+
+    <div class="wrap wrap-default-color first-block">
+        <h1>{{ product.name }}</h1>
+        <div class="main-image">
+            {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
+            <img src="{% path firstGalleryHasMedia.media, 'big' %}" alt="{{firstGalleryHasMedia.media.description}}" class="custom">
+        </div>
+        <ul class="thumbnails">
+            {% for galleryHasMedia in gallery.galleryHasMedias %}
+                <li><a href="{% path galleryHasMedia.media, 'big' %}">{% thumbnail galleryHasMedia.media, 'small' %}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="description">
+            {{ product.description }}
+        </div>
+
+    </div>
+{% endblock %}

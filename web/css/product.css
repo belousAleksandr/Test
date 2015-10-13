@@ -1,0 +1,25 @@
+img {
+    max-width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    height: auto;
+    background: #fff;
+    box-shadow: 1px 1px 7px rgba(0,0,0,0.1);
+}
+ul {
+    list-style: none;
+    margin-bottom: 1.5em;
+}
+.main-image {
+    width: 380px;
+    margin-bottom: 0.75em;
+}
+
+.thumbnails img {
+    height: 100px;
+}
+.thumbnails li {
+
+    display: inline;
+    margin: 0 10px 0 0;
+}

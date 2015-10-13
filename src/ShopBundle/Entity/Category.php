@@ -3,7 +3,7 @@
 namespace ShopBundle\Entity;
 
 
-use Application\Sonata\MediaBundle\Document\Gallery;
+use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\MediaBundle\Model\GalleryHasMedia;
@@ -38,6 +38,12 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      */
     protected $enabled;
 
+    /**
+     * @var Product[]
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\Product", mappedBy="category")
+     */
+    protected $products;
+
 
     /**
      * Get id
@@ -48,6 +54,13 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     {
         return $this->id;
     }
+
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(name="slug", type="string")
+     */
+    protected $slug;
 
     /**
      * @var string $title
@@ -94,6 +107,7 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      */
     public function __construct()
     {
+        parent::__construct();
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -164,7 +178,7 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
 
     /**
      * @param mixed $gallery
-     * @return Property
+     * @return $this
      */
     public function setGallery($gallery)
     {
@@ -180,7 +194,7 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
         if (is_null($this->getGallery())) {
             $gallery = new Gallery();
             $gallery->setEnabled(true);
-            $gallery->setName($this->getName());
+            $gallery->setName($this->getTitle());
             $gallery->setContext("default");
             $gallery->setDefaultFormat("default_big");
             $this->setGallery($gallery);
@@ -225,5 +239,56 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
 
     public function __toString() {
         return $this->getId()? $this->getTitle(): 'New Category';
+    }
+
+    /**
+     * Add products
+     *
+     * @param \ShopBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\ShopBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \ShopBundle\Entity\Product $products
+     */
+    public function removeProduct(\ShopBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
     }
 }

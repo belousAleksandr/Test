@@ -5,6 +5,7 @@ namespace ShopBundle\Controller;
 use ShopBundle\Entity\Category;
 use ShopBundle\Entity\CategoryRepository;
 //use ShopBundle\Entity\Product;
+use ShopBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
@@ -12,11 +13,17 @@ class DefaultController extends Controller
 
     public function indexAction()
     {
-        return $this->render(':Frontend:index.html.twig', array());
+        $em = $this->getDoctrine()->getManager();
+        /** @var CategoryRepository $categoriesRepository */
+        $categoriesRepository = $em->getRepository('ShopBundle:Category');
+        $categories = $categoriesRepository->findAllEnabled();
+
+        return $this->render(':Frontend:index.html.twig', array('categories' => $categories));
     }
 
     public function productAction(Product $product)
     {
+
         return $this->render(':Frontend:product.html.twig', array('product' => $product));
     }
 

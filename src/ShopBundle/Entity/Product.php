@@ -28,6 +28,20 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
      */
     private $id;
 
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string")
+     */
+    protected $slug;
+
+
+    /**
+     * @var Category
+     * @ORM\ManyToOne(targetEntity="ShopBundle\Entity\Category", inversedBy="products")
+     */
+    protected $category;
+
 
     /**
      * @var string $title
@@ -54,6 +68,14 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     private $description;
 
     /**
+     * @var string $shortDescription
+     *
+     * @Gedmo\Translatable
+     * @ORM\Column(name="short_description", type="text")
+     */
+    private $shortDescription;
+
+    /**
      * @ORM\OneToMany(
      *     targetEntity="ShopBundle\Entity\Translations\ProductTranslation",
      *  mappedBy="object",
@@ -73,6 +95,7 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
      */
     public function __construct()
     {
+        parent::__construct();
         $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -143,7 +166,7 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
 
     /**
      * @param mixed $gallery
-     * @return Property
+     * @return $this
      */
     public function setGallery($gallery)
     {
@@ -191,4 +214,70 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     public function __toString() {
         return $this->getId()? $this->getTitle(): 'New product';
     }
+
+    /**
+     * Set category
+     *
+     * @param \ShopBundle\Entity\Category $category
+     * @return Product
+     */
+    public function setCategory(\ShopBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \ShopBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     * @return Product
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string 
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     * @return Product
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+
 }

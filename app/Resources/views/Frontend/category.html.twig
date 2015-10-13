@@ -1,1 +1,29 @@
 {% extends ':Frontend:base.html.twig' %}
+ {% block stylesheets %}
+     {{ parent() }}
+     <link rel="stylesheet" href="{{ asset('css/category.css') }}" type="text/css" media="all">
+ {% endblock %}
+{% block body %}
+
+    <div class="wrap product_item_wrap wrap-default-color first-block">
+        {% for product in category.products %}
+            <div class="product-thumb">
+                <a href="{{ path('shop_product', {'category_slug': category.slug, 'slug': product.slug}) }}">
+                    <h3>{{product.name}}</h3>
+                    {% set gallery = product.gallery %}
+                    {% if gallery %}
+                    {% set media = gallery.galleryHasMedias.first %}
+
+                        {% if media %}
+                            {% thumbnail media, 'small' %}
+                        {% endif %}
+                    {% endif %}
+                    <div class="short-description">
+                        {{product.shortDescription}}
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

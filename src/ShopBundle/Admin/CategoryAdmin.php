@@ -48,6 +48,7 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->add('enabled')
+            ->add('slug')
             ->add('title')
             ->add('description')
             ->add('shortDescription')

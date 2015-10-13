@@ -1,5 +1,5 @@
 html, body {
-    background: url("../../images/light-tile.gif") repeat 0 0;
+    background: url("../images/light-tile.gif") repeat 0 0;
     margin: 0;
     padding: 0;
     font-family: Arial;
@@ -93,8 +93,4 @@ img.item-img {
 footer {
     height: 300px;
     background: #5f5d62;
-}
-
-div.wrap-gallery {
-    height: 400px;
 }

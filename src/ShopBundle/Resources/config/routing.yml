@@ -3,7 +3,7 @@ shop_homepage:
     defaults: { _controller: ShopBundle:Default:index }
 
 shop_product:
-    path:     /{category}/product/{id}/
+    path:     /{category_slug}/item/{slug}/
     defaults: { _controller: ShopBundle:Default:product }
 
 shop_categories:
@@ -11,7 +11,7 @@ shop_categories:
     defaults: { _controller: ShopBundle:Default:categories }
 
 shop_category:
-    path:     /category
+    path:     /category/{slug}
     defaults: { _controller: ShopBundle:Default:category }
 
 shop_about_us:

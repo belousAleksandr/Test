@@ -15,9 +15,12 @@ class ProductAdmin extends Admin{
     protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper)
     {
         $formMapper
+            ->add('category')
+            ->add('slug')
             ->add('title')
             ->add('name')
-            ->add('description');
+            ->add('description')
+            ->add('shortDescription');
     }
 
     // Fields to be shown on filter forms
