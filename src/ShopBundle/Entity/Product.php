@@ -60,6 +60,11 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="ShopBundle\Entity\ProductCharacteristic", mappedBy="product", cascade={"persist", "remove"})
+     */
+    protected $characteristic;
+
+    /**
      * @var string $description
      *
      * @Gedmo\Translatable
@@ -280,4 +285,37 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     }
 
 
+
+    /**
+     * Add characteristic
+     *
+     * @param \ShopBundle\Entity\ProductCharacteristic $characteristic
+     * @return Product
+     */
+    public function addCharacteristic(\ShopBundle\Entity\ProductCharacteristic $characteristic)
+    {
+        $this->characteristic[] = $characteristic;
+
+        return $this;
+    }
+
+    /**
+     * Remove characteristic
+     *
+     * @param \ShopBundle\Entity\ProductCharacteristic $characteristic
+     */
+    public function removeCharacteristic(\ShopBundle\Entity\ProductCharacteristic $characteristic)
+    {
+        $this->characteristic->removeElement($characteristic);
+    }
+
+    /**
+     * Get characteristic
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCharacteristic()
+    {
+        return $this->characteristic;
+    }
 }

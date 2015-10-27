@@ -27,10 +27,20 @@
         </div>
         <ul class="thumbnails">
             {% for galleryHasMedia in gallery.galleryHasMedias %}
-                <li><a href="{% path galleryHasMedia.media, 'big' %}">{% thumbnail galleryHasMedia.media, 'small' %}</a></li>
+                <li><a href="{% path galleryHasMedia.media, 'big' %}">{% thumbnail galleryHasMedia.media, 'thumbnails' %}</a></li>
             {% endfor %}
         </ul>
+        <div class="characteristic">
+            <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
+            <ul>
+                {% for characteristic in product.characteristic %}
+                    <li>{{ characteristic.name }}: {{ characteristic.value }}</li>
+                {% endfor %}
+
+            </ul>
+        </div>
         <div class="description">
+            <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
             {{ product.description }}
         </div>
 

@@ -8,6 +8,7 @@ namespace ShopBundle\Admin;
  */
 
 use ShopBundle\Entity\Product;
+use ShopBundle\Entity\ProductCharacteristic;
 use Sonata\AdminBundle\Admin\Admin;
 
 class ProductAdmin extends Admin{
@@ -15,12 +16,22 @@ class ProductAdmin extends Admin{
     protected function configureFormFields(\Sonata\AdminBundle\Form\FormMapper $formMapper)
     {
         $formMapper
+            ->with('Main')
             ->add('category')
             ->add('slug')
             ->add('title')
             ->add('name')
             ->add('description')
-            ->add('shortDescription');
+            ->add('shortDescription')
+            ->end()
+            ->with('Characteristic')
+            ->add('characteristic', 'sonata_type_collection',
+                array('by_reference' => false),
+                array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                ))
+            ->end();
     }
 
     // Fields to be shown on filter forms
@@ -36,6 +47,7 @@ class ProductAdmin extends Admin{
             ->add('title')
             ->add('name')
             ->add('description')
+            ->add('gallery')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -43,5 +55,25 @@ class ProductAdmin extends Admin{
                     'delete' => array(),
                 )
             ));
+    }
+
+    public function preUpdate($object)
+    {
+        $this->setData($object);
+    }
+
+    protected function setData(Product $product){
+        /** @var ProductCharacteristic $characteristic */
+        foreach($product->getCharacteristic() as $characteristic){
+            $characteristic->setProduct($product);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prePersist($object)
+    {
+        $this->setData($object);
     }
 }

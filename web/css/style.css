@@ -26,6 +26,10 @@ html, body {
     font-style: italic;
 }
 
+.wrap-content h1 {
+    margin-top: 0;
+}
+
 header {
     margin-top: -54px;
     color: #f5f5f5;
@@ -63,7 +67,13 @@ div.item-description h2 {
     text-transform: uppercase;
 }
 
+div.category-thumb a:link, div.category-thumb a:active, div.category-thumb a:hover, div.category-thumb a:visited{
+    color: #7a756f;
+    text-decoration: none;
+}
+
 div.item-description {
+    color: #7a756f;
     margin: -3px 0 0 0;
     border-left: 1px solid #7a756f;
     border-right: 1px solid #7a756f;
@@ -91,6 +101,6 @@ img.item-img {
 
 
 footer {
-    height: 300px;
+    height: 100px;
     background: #5f5d62;
 }

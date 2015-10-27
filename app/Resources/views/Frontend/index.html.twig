@@ -70,9 +70,9 @@
             <div class="category-thumb">
                 <a href="{{ path('shop_category', {'_locale': app.request.locale, 'slug': category.slug}) }}">
                     {% if gallery %}
-                        {% set firstMedia = gallery.galleryHasMedias.first %}
-                        {% if firstMedia%}
-                            {% thumbnail firstMedia, 'small' %}
+                        {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
+                        {% if firstGalleryHasMedia%}
+                            {% thumbnail firstGalleryHasMedia.media, 'small' %}
                         {% endif %}
                     {% endif %}
                     <div class="item-description">
