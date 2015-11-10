@@ -32,15 +32,6 @@ class DefaultController extends Controller
         return $this->render(':Frontend:category.html.twig', array('category' => $category));
     }
 
-    public function categoriesAction()
-    {
-        /** @var CategoryRepository $categoryRepository */
-        $categoryRepository = $this->getDoctrine()->getRepository(Category::REPOSITORY);
-        $categories = $categoryRepository->findAllEnabled();
-
-        return $this->render(':Frontend:categories.html.twig', array('categories' => $categories));
-    }
-
     public function aboutUsAction()
     {
         return $this->render(':Frontend:aboutUs.html.twig', array());

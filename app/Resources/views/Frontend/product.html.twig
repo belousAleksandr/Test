@@ -19,30 +19,42 @@
 {% block body %}
     {% set gallery = product.gallery %}
 
-    <div class="wrap wrap-default-color first-block">
-        <h1>{{ product.name }}</h1>
-        <div class="main-image">
-            {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
-            <img src="{% path firstGalleryHasMedia.media, 'big' %}" alt="{{firstGalleryHasMedia.media.description}}" class="custom">
-        </div>
-        <ul class="thumbnails">
-            {% for galleryHasMedia in gallery.galleryHasMedias %}
-                <li><a href="{% path galleryHasMedia.media, 'big' %}">{% thumbnail galleryHasMedia.media, 'thumbnails' %}</a></li>
-            {% endfor %}
-        </ul>
-        <div class="characteristic">
-            <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
-            <ul>
-                {% for characteristic in product.characteristic %}
-                    <li>{{ characteristic.name }}: {{ characteristic.value }}</li>
-                {% endfor %}
+    <div class="product-info">
 
-            </ul>
-        </div>
-        <div class="description">
-            <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
-            {{ product.description }}
-        </div>
+        <div class="wrap wrap-default-color first-block">
+            <h1>{{ product.name }}</h1>
+            <div class="image-block">
+                <div class="main-image">
+                    {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
+                    <img src="{% path firstGalleryHasMedia.media, 'big' %}" alt="{{firstGalleryHasMedia.media.description}}" class="custom">
+                </div>
+                <ul class="thumbnails">
+                    {% for galleryHasMedia in gallery.galleryHasMedias %}
+                        <li><a href="{% path galleryHasMedia.media, 'big' %}">{% thumbnail galleryHasMedia.media, 'thumbnails' %}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="characteristic">
+                <div class="price-block">
+                    <b>{{ product.price }} грн.</b>
+                </div>
+                <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
+                <ul>
+                    {% for characteristic in product.characteristic %}
+                        <li><strong>{{ characteristic.name }}</strong>: {{ characteristic.value }}</li>
+                    {% endfor %}
 
+                </ul>
+            </div>
+
+            <div style="clear: both;"></div>
+        </div>
+        <div class="wrap wrap-default-color">
+            <div class="description">
+                <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
+                {{ product.description }}
+            </div>
+
+        </div>
     </div>
 {% endblock %}

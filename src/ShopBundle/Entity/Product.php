@@ -96,6 +96,11 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     private $gallery;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -318,4 +323,23 @@ class Product extends AbstractPersonalTranslatable implements TranslatableInterf
     {
         return $this->characteristic;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     * @return Product
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+        return $this;
+    }
+
 }

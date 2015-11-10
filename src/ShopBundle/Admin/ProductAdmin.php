@@ -18,6 +18,7 @@ class ProductAdmin extends Admin{
         $formMapper
             ->with('Main')
             ->add('category')
+            ->add('price')
             ->add('slug')
             ->add('title')
             ->add('name')
@@ -47,6 +48,7 @@ class ProductAdmin extends Admin{
             ->add('title')
             ->add('name')
             ->add('description')
+            ->add('price')
             ->add('gallery')
             ->add('_action', 'actions', array(
                 'actions' => array(

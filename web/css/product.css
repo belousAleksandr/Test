@@ -11,7 +11,7 @@ ul {
     margin-bottom: 1.5em;
 }
 .main-image {
-    width: 380px;
+    width: 400px;
     margin-bottom: 0.75em;
 }
 
@@ -22,4 +22,47 @@ ul {
 
     display: inline;
     margin: 0 10px 0 0;
+}
+
+.image-block {
+    width: 50%;
+    float: left;
+}
+
+.characteristic {
+    float: left;
+}
+
+.product-info h3 {
+    margin: 0;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: black;
+}
+.product-info ul {
+    padding: 0;
+}
+
+.product-info ul li{
+    padding: 5px 0;
+}
+
+
+.product-info div.description{
+    font-size: 14px;
+    color: #999;
+}
+
+h1 {
+    font-size: 40px;
+    text-transform: uppercase;
+}
+
+.price-block {
+    border: 1px solid green ;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    padding: 20px;
+    height: 50px;
+    font-size: 40px;
+    color: green;
 }

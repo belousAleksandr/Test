@@ -1,0 +1,6 @@
+ul.contact-list {
+    list-style: none;
+}
+ul.contact-list li {
+    margin: 10px 0;
+}

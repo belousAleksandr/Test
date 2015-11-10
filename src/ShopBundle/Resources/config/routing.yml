@@ -6,10 +6,6 @@ shop_product:
     path:     /{category_slug}/item/{slug}/
     defaults: { _controller: ShopBundle:Default:product }
 
-shop_categories:
-    path:     /categories
-    defaults: { _controller: ShopBundle:Default:categories }
-
 shop_category:
     path:     /category/{slug}
     defaults: { _controller: ShopBundle:Default:category }
