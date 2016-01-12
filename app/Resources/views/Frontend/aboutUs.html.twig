@@ -1,1 +1,7 @@
 {% extends ':Frontend:base.html.twig' %}
+
+{% block body %}
+    <div class="wrap wrap-text product_item_wrap wrap-default-color">
+        {{ page.content | raw }}
+    </div>
+{% endblock %}

@@ -17,12 +17,12 @@
 {% endblock %}
 
 {% block body %}
-    {% set gallery = product.gallery %}
+    {% set gallery = page.gallery %}
 
     <div class="product-info">
 
-        <div class="wrap wrap-default-color first-block">
-            <h1>{{ product.name }}</h1>
+        <div class="wrap wrap-default-color">
+            <h1>{{ page.name }}</h1>
             <div class="image-block">
                 <div class="main-image">
                     {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
@@ -36,15 +36,18 @@
             </div>
             <div class="characteristic">
                 <div class="price-block">
-                    <b>{{ product.price }} грн.</b>
+                    <b>{{ page.price }} грн.</b>
                 </div>
-                <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
-                <ul>
-                    {% for characteristic in product.characteristic %}
-                        <li><strong>{{ characteristic.name }}</strong>: {{ characteristic.value }}</li>
-                    {% endfor %}
+                {% if page.characteristic | length > 0  %}
 
-                </ul>
+                    <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
+                    <ul>
+                        {% for characteristic in page.characteristic %}
+                            <li><strong>{{ characteristic.name }}</strong>: {{ characteristic.value }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
             </div>
 
             <div style="clear: both;"></div>
@@ -52,7 +55,7 @@
         <div class="wrap wrap-default-color">
             <div class="description">
                 <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
-                {{ product.description }}
+                {{ page.description }}
             </div>
 
         </div>

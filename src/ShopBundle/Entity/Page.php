@@ -29,6 +29,13 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
     /**
      * @var string $title
      *
+     * @ORM\Column(name="page_key", type="string", length=100)
+     */
+    private $key;
+
+    /**
+     * @var string $title
+     *
      * @ORM\Column(name="title", type="string", length=255)
      * @Gedmo\Translatable
      */
@@ -51,6 +58,14 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
     private $mDescription;
 
     /**
+     * @var string $description
+     *
+     * @ORM\Column(name="content", type="text")
+     * @Gedmo\Translatable
+     */
+    private $content;
+
+    /**
      * @ORM\OneToMany(
      *     targetEntity="ShopBundle\Entity\Translations\PageTranslation",
      *  mappedBy="object",
@@ -59,14 +74,6 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
      * @Assert\Valid(deep = true)
      */
     protected $translations;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -137,5 +144,40 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
         return $this->getId()? $this->getName(): 'New page';
     }
 
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     * @return Page
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * @param string $key
+     * @return Page
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+        return $this;
+    }
 
 }

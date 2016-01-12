@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Application\Sonata\ClassificationBundle\ApplicationSonataClassificationBundle(),
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
             // If you haven't already, add the storage bundle
             // This example uses SonataDoctrineORMAdmin but

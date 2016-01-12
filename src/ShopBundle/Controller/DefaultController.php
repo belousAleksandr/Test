@@ -18,25 +18,36 @@ class DefaultController extends Controller
         $categoriesRepository = $em->getRepository('ShopBundle:Category');
         $categories = $categoriesRepository->findAllEnabled();
 
-        return $this->render(':Frontend:index.html.twig', array('categories' => $categories));
+        return $this->render(':Frontend:index.html.twig', array('categories' => $categories,
+            'page' => $this->getPage('index')));
     }
 
     public function productAction(Product $product)
     {
 
-        return $this->render(':Frontend:product.html.twig', array('product' => $product));
+        return $this->render(':Frontend:product.html.twig', array('page' => $product));
     }
 
     public function categoryAction(Category $category)
     {
-        return $this->render(':Frontend:category.html.twig', array('category' => $category));
+        return $this->render(':Frontend:category.html.twig', array('page' => $category));
     }
 
     public function aboutUsAction()
     {
-        return $this->render(':Frontend:aboutUs.html.twig', array());
+        return $this->render(':Frontend:aboutUs.html.twig', array('page' => $this->getPage('about_us')));
+    }
+
+    private function getPage($key) {
+        $pageRepository = $this->getDoctrine()->getRepository('ShopBundle:Page');
+        $page = $pageRepository->findOneBy(array('key' => $key));
+        if(!$page) {
+            throw new \Exception('Page is not found');
+        }
+
+        return $page;
     }
     public function contactUsAction() {
-        return $this->render(':Frontend:contactUs.html.twig', array());
+        return $this->render(':Frontend:contactUs.html.twig', array('page' => $this->getPage('contact-us')));
     }
 }

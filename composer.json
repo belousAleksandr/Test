@@ -31,7 +31,9 @@
         "sonata-project/easy-extends-bundle": "2.1.*@dev",
         "sonata-project/user-bundle": "2.3.*@dev",
         "sonata-project/datagrid-bundle": "2.2.*@dev",
-        "sonata-project/classification-bundle": "2.3.x-dev"
+        "sonata-project/classification-bundle": "2.3.x-dev",
+        "sonata-project/formatter-bundle": "2.3.1",
+        "knplabs/knp-menu-bundle": "dev-master"
 
     },
     "require-dev": {

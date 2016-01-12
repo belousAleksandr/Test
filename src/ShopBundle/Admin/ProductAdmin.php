@@ -65,9 +65,11 @@ class ProductAdmin extends Admin{
     }
 
     protected function setData(Product $product){
-        /** @var ProductCharacteristic $characteristic */
-        foreach($product->getCharacteristic() as $characteristic){
-            $characteristic->setProduct($product);
+        if($product->getCharacteristic()) {
+            /** @var ProductCharacteristic $characteristic */
+            foreach($product->getCharacteristic() as $characteristic){
+                $characteristic->setProduct($product);
+            }
         }
     }
 

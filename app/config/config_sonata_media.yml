@@ -17,7 +17,7 @@ sonata_media:
             formats:
                 small: { width: 310 , quality: 100}
                 thumbnails: { height: 100 , quality: 100}
-                big:   { width: 800 , quality: 100}
+                big:   { width: 1280 , quality: 100}
 
     cdn:
         server:

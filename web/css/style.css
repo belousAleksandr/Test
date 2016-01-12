@@ -2,8 +2,9 @@ html, body {
     background: url("../images/light-tile.gif") repeat 0 0;
     margin: 0;
     padding: 0;
-    font-family: Arial;
     font-size: 12px;
+    width: 100%;
+    height: 100%;
 }
 .wrap {
     margin: 0 auto;
@@ -13,10 +14,20 @@ html, body {
 .wrap-default-color {
     background: white;
 }
-.first-block {
-    margin-top: 54px;
+
+.wrap-text{
+    width: 1240px;
+    padding: 40px 40px;
+}
+header .wrap div{
+    width: 49%;
+    display: inline-block;
 }
 
+header .wrap div:last-child{
+    text-align: right;
+    font-size: 18px;
+}
 .wrap-content {
     color: #666669;
     font-weight: normal;
@@ -31,7 +42,6 @@ html, body {
 }
 
 header {
-    margin-top: -54px;
     color: #f5f5f5;
     background: #5f5d62;
     z-index: 9999;
@@ -74,7 +84,7 @@ div.category-thumb a:link, div.category-thumb a:active, div.category-thumb a:hov
 
 div.item-description {
     color: #7a756f;
-    margin: -3px 0 0 0;
+    margin: -4px 0 0 0;
     border-left: 1px solid #7a756f;
     border-right: 1px solid #7a756f;
     border-bottom: 1px solid #7a756f;
@@ -99,8 +109,21 @@ img.item-img {
     border-top-right-radius: 4px;
 }
 
+#body{
+    min-height: 100%;
+    padding-top: 54px;
+    padding-bottom: 100px;
+    margin-bottom: -100px;
+}
 
 footer {
     height: 100px;
     background: #5f5d62;
+}
+
+footer div {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    padding: 42px 0 !important;
 }

@@ -2,7 +2,7 @@ imports:
     - { resource: '@SonataTranslationBundle/Resources/config/config.yml'}
 
 sonata_translation:
-    locales: [ru, ua]
+    locales: [ru]
     default_locale: ru
     # here enable the types you need
     gedmo:

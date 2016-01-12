@@ -49,18 +49,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="wrap wrap-default-color first-block">
+    <div class="wrap wrap-default-color">
         <div id="slider" class="nivoSlider">
-            <img src="{{ asset('images/main-gallery.jpg') }}" alt="">
-            <img src="{{ asset('images/main-gallery2.jpg') }}" alt="">
+            <img src="{{ asset('images/main_image1.jpeg') }}" alt="">
+            <img src="{{ asset('images/main-image2.jpeg') }}" alt="">
+            <img src="{{ asset('images/main_image3.jpeg') }}" alt="">
         </div>
     </div>
-    <div class="clearfix"></div>
     <div class="wrap wrap-content wrap-default-color">
-        <h1>Саженцы плодовых деревьев</h1>
-
-        Питомник Гарди осуществляет поставку саженцев растений, клумбовых и комнатных цветов в крупнейшие
-        торговые сети Украины. В настоящий период мы активно расширяем ассортимент растений.
+        {{ page.content | raw }}
 
     </div>
     <div class="wrap top-categories wrap-default-color">

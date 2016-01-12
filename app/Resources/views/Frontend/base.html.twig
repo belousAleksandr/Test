@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}{{page.title}}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" media="all">
     {% endblock %}
@@ -11,43 +11,28 @@
 <body>
 <header>
     <div class="wrap">
-    <ul id ="header-nav-list">
-        <li><a href="{{ path('shop_homepage') }}">{{ 'Home page' | trans({}, 'frontend') }}</a></li>
-        <li><a href="{{ path('shop_about_us') }}">{{ 'About us' | trans({}, 'frontend') }}</a></li>
-        <li><a href="{{ path('shop_contact_us') }}">{{ 'Contuct us' | trans({}, 'frontend') }}</a></li>
-    </ul>
+        <div>
+            <ul id ="header-nav-list">
+                <li><a href="{{ path('shop_homepage') }}">{{ 'Home page' | trans({}, 'frontend') }}</a></li>
+                <li><a href="{{ path('shop_about_us') }}">{{ 'About us' | trans({}, 'frontend') }}</a></li>
+                <li><a href="{{ path('shop_contact_us') }}">{{ 'Contuct us' | trans({}, 'frontend') }}</a></li>
+            </ul>
+        </div>
+        <div>
+            <span>Тел: (067) 249-6414</span>
+        </div>
     </div>
 </header>
+{#<div style="clear: both;"></div>#}
+<div id="body">
+    {% block body %}
 
+    {% endblock %}
+</div>
 
-{% block body %}
-    <div class="wrap wrap-gallery wrap-default-color first-block">
-        sdfsfd
-    </div>
-    <div class="wrap wrap-content wrap-default-color">
-        <h1>Саженцы плодовых деревьев</h1>
-
-        Питомник Гарди осуществляет поставку саженцев растений, клумбовых и комнатных цветов в крупнейшие
-        торговые сети Украины. В настоящий период мы активно расширяем ассортимент растений.
-
-    </div>
-    <div class="wrap top-categories wrap-default-color">
-        {% for category in categories %}
-            <div class="category-thumb">
-                <img class="item-img" src="{{ asset('green-garden.jpg') }}" alt=""/>
-                <div class="item-description">
-                    <h2>{{category.name}}</h2>
-                    {{ category.shortDescription }}
-                </div>
-
-            </div>
-        {% endfor %}
-
-    </div>
-{% endblock %}
 <footer>
     <div class="wrap">
-
+        © 2015 - {{ 'now' | date('Y') }}
     </div>
 </footer>
 {% block javascripts %}
