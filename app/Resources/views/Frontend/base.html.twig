@@ -11,12 +11,13 @@
 <body>
 <header>
     <div class="wrap">
-        <div>
-            <ul id ="header-nav-list">
-                <li><a href="{{ path('shop_homepage') }}">{{ 'Home page' | trans({}, 'frontend') }}</a></li>
-                <li><a href="{{ path('shop_about_us') }}">{{ 'About us' | trans({}, 'frontend') }}</a></li>
-                <li><a href="{{ path('shop_contact_us') }}">{{ 'Contuct us' | trans({}, 'frontend') }}</a></li>
-            </ul>
+        <div id ="header-nav-list">
+            {{ knp_menu_render('ShopBundle:Builder:mainMenu') }}
+            {#<ul id ="header-nav-list">#}
+                {#<li><a href="{{ path('shop_homepage') }}">{{ 'Home page' | trans({}, 'frontend') }}</a></li>#}
+                {#<li><a href="{{ path('shop_about_us') }}">{{ 'About us' | trans({}, 'frontend') }}</a></li>#}
+                {#<li><a href="{{ path('shop_contact_us') }}">{{ 'Contuct us' | trans({}, 'frontend') }}</a></li>#}
+            {#</ul>#}
         </div>
         <div>
             <span>Тел: (067) 249-6414</span>
@@ -25,6 +26,9 @@
 </header>
 {#<div style="clear: both;"></div>#}
 <div id="body">
+    {% block navigation %}
+
+    {% endblock %}
     {% block body %}
 
     {% endblock %}

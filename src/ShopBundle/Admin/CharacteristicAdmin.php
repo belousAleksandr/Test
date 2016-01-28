@@ -11,6 +11,15 @@ use Sonata\AdminBundle\Show\ShowMapper;
 class CharacteristicAdmin extends Admin
 {
 
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureListFields(ListMapper $list)
+    {
+        $list
+            ->addIdentifier('name')
+            ;
+    }
 
     /**
      * @param FormMapper $formMapper
@@ -19,6 +28,7 @@ class CharacteristicAdmin extends Admin
     {
         $formMapper
             ->add('name')
+
         ;
     }
 }

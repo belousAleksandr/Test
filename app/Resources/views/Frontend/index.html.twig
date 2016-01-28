@@ -34,8 +34,8 @@
                 controlNavThumbs: false,        // Use thumbnails for Control Nav
                 pauseOnHover: true,             // Stop animation while hovering
                 manualAdvance: false,           // Force manual transitions
-                prevText: 'Prev',               // Prev directionNav text
-                nextText: 'Next',               // Next directionNav text
+                prevText: '',               // Prev directionNav text
+                nextText: '',               // Next directionNav text
                 randomStart: false,             // Start on a random slide
                 beforeChange: function(){},     // Triggers before a slide transition
                 afterChange: function(){},      // Triggers after a slide transition
@@ -65,7 +65,7 @@
             {% set gallery = category.gallery %}
 
             <div class="category-thumb">
-                <a href="{{ path('shop_category', {'_locale': app.request.locale, 'slug': category.slug}) }}">
+                <a href="{{ path('shop_category', {'_locale': app.request.locale, 'category_slug': category.slug}) }}">
                     {% if gallery %}
                         {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
                         {% if firstGalleryHasMedia%}
@@ -74,7 +74,7 @@
                     {% endif %}
                     <div class="item-description">
                         <h2>{{category.title}}</h2>
-                        {{ category.shortDescription }}
+                        {{ category.shortDescription | truncate(100, false, "...")}}
                     </div>
                 </a>
 

@@ -3,7 +3,13 @@
      {{ parent() }}
      <link rel="stylesheet" href="{{ asset('css/category.css') }}" type="text/css" media="all">
  {% endblock %}
+{% block navigation %}
+    <div class="wrap wrap-default-color navigation">
+        {{ knp_menu_render('ShopBundle:Builder:categoryMenu') }}
+    </div>
+{% endblock %}
 {% block body %}
+
 
     <div class="wrap product_item_wrap wrap-default-color">
         {% for product in page.products %}
@@ -12,21 +18,22 @@
                     <h3>{{product.name}}</h3>
                     {% set gallery = product.gallery %}
                     {% if gallery %}
-                    {% set media = gallery.galleryHasMedias.first %}
+                    {% set galleryHasMedias = gallery.galleryHasMedias.first %}
 
-                        {% if media %}
-                            {% thumbnail media, 'small' %}
+                        {% if galleryHasMedias %}
+                            {% thumbnail galleryHasMedias.media, 'small' %}
                         {% endif %}
                     {% endif %}
                     <div class="short-description">
-                        {{product.shortDescription}}
+                        {{product.shortDescription | raw |truncate(100)}}
                     </div>
                 </a>
             </div>
         {% endfor %}
 
     </div>
-    <div class="wrap wrap-text wrap-default-color">
+    <div class="wrap wrap-text wrap-default-color category-content">
+        <h1>{{ page.title }}</h1>
         {{ page.description }}
     </div>
 {% endblock %}

@@ -7,7 +7,7 @@ shop_product:
     defaults: { _controller: ShopBundle:Default:product }
 
 shop_category:
-    path:     /category/{slug}
+    path:     /category/{category_slug}
     defaults: { _controller: ShopBundle:Default:category }
 
 shop_about_us:

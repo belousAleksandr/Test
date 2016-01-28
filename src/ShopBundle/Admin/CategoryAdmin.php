@@ -50,8 +50,9 @@ class CategoryAdmin extends Admin
             ->add('enabled')
             ->add('slug')
             ->add('title')
-            ->add('description')
+            ->add('name')
             ->add('shortDescription')
+            ->add('description')
         ;
     }
 

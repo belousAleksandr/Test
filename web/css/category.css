@@ -23,6 +23,7 @@ div.product-thumb div.short-description {
 div.product-thumb {
     width: 310px;
     padding: 20px;
+    margin: 10px 10px;
     border: 1px solid;
     border-color: #dddddd;
 }
@@ -42,4 +43,11 @@ div.product-thumb img{
     border-radius: 0px 10px 10px 0px;
     -moz-border-radius: 0px 10px 10px 0px;
     -webkit-border-radius: 0px 10px 10px 0px;
+}
+.category-content h1{
+    color: black;
+}
+.category-content{
+    color: #999;
+    text-align: justify;
 }

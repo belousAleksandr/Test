@@ -71,6 +71,14 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     protected $title;
 
     /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     * @Gedmo\Translatable
+     */
+    protected $name;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="description", type="text")
@@ -148,12 +156,11 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     }
 
     /**
-     * @param string $locale
-     * @return null|string
+     * @return string
      */
-    public function getShortDescription($locale = 'ru')
+    public function getShortDescription()
     {
-        return $this->getTranslation('shortDescription', $locale );
+        return $this->shortDescription;
     }
 
     /**
@@ -290,5 +297,28 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     {
         $this->slug = $slug;
         return $this;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Category
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 }

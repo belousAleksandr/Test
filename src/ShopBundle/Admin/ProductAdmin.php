@@ -45,39 +45,15 @@ class ProductAdmin extends Admin{
     protected function configureListFields(\Sonata\AdminBundle\Datagrid\ListMapper $listMapper)
     {
         $listMapper
-            ->add('title')
             ->add('name')
-            ->add('description')
+            ->add('shortDescription')
             ->add('price')
             ->add('gallery')
             ->add('_action', 'actions', array(
                 'actions' => array(
-                    'show' => array(),
                     'edit' => array(),
                     'delete' => array(),
                 )
             ));
-    }
-
-    public function preUpdate($object)
-    {
-        $this->setData($object);
-    }
-
-    protected function setData(Product $product){
-        if($product->getCharacteristic()) {
-            /** @var ProductCharacteristic $characteristic */
-            foreach($product->getCharacteristic() as $characteristic){
-                $characteristic->setProduct($product);
-            }
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prePersist($object)
-    {
-        $this->setData($object);
     }
 }

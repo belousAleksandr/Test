@@ -7,6 +7,7 @@ use ShopBundle\Entity\CategoryRepository;
 //use ShopBundle\Entity\Product;
 use ShopBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
@@ -28,8 +29,13 @@ class DefaultController extends Controller
         return $this->render(':Frontend:product.html.twig', array('page' => $product));
     }
 
-    public function categoryAction(Category $category)
+    public function categoryAction(Request $request)
     {
+        $categoryRepository = $this->getDoctrine()->getRepository(Category::REPOSITORY);
+        $category = $categoryRepository->findOneBy(array('slug' => $request->attributes->get('category_slug')));
+        if(!$category) {
+            throw new \Exception('Category is not found');
+        }
         return $this->render(':Frontend:category.html.twig', array('page' => $category));
     }
 

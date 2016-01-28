@@ -1,4 +1,4 @@
-{% extends ':Frontend:base.html.twig' %}
+{% extends ':Frontend:category.html.twig' %}
  {% block stylesheets %}
      {{ parent() }}
      <link rel="stylesheet" href="{{ asset('css/product.css') }}" type="text/css" media="all">
@@ -17,6 +17,7 @@
 {% endblock %}
 
 {% block body %}
+
     {% set gallery = page.gallery %}
 
     <div class="product-info">
@@ -38,26 +39,14 @@
                 <div class="price-block">
                     <b>{{ page.price }} грн.</b>
                 </div>
-                {% if page.characteristic | length > 0  %}
-
-                    <h3>{{ 'Characteristic'| trans({}, 'messages') }}</h3>
-                    <ul>
-                        {% for characteristic in page.characteristic %}
-                            <li><strong>{{ characteristic.name }}</strong>: {{ characteristic.value }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                <div class="description">
+                    <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
+                    {{ page.description }}
+                </div>
 
             </div>
 
             <div style="clear: both;"></div>
-        </div>
-        <div class="wrap wrap-default-color">
-            <div class="description">
-                <h3>{{ 'Description'| trans({}, 'messages') }}</h3>
-                {{ page.description }}
-            </div>
-
         </div>
     </div>
 {% endblock %}
