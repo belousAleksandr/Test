@@ -28,3 +28,21 @@ sonata_admin:
         history_revision_timestamp:  SonataAdminBundle:CRUD:history_revision_timestamp.html.twig
         short_object_description:    SonataAdminBundle:Helper:short-object-description.html.twig
         search_result_block: SonataAdminBundle:Block:block_search_result.html.twig
+    dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+
+        groups:
+            admin:
+                label_catalogue: 'Admin'
+                label: Manage property
+                items: ~
+
+            sonata_user:
+                label_catalogue: 'Admin'
+                label: Users management
+                items:
+                    - sonata.user.admin.group
+                    - sonata.user.admin.user

@@ -9,7 +9,8 @@ imports:
     - { resource: config_sonata_media.yml }
     - { resource: config_fos_user.yml }
     - { resource: config_sonata_user.yml }
-
+parameters:
+    sonata.media.admin.media.class: Application\Sonata\MediaBundle\Admin\MediaAdmin
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -37,6 +38,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'form/fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -80,7 +83,7 @@ swiftmailer:
 knp_menu:
     # use "twig: false" to disable the Twig extension and the TwigRenderer
     twig:
-        template: knp_menu.html.twig
+        template: ShopBundle:Default:knp_menu.html.twig
     #  if true, enables the helper for PHP templates
     templating: false
     # the renderer to use, list is also available by default

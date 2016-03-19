@@ -19,9 +19,3 @@ services:
         arguments: [~, ShopBundle\Entity\Page, ShopBundle:PageAdmin]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: Page}
-
-    shop.admin.characteristic:
-        class: ShopBundle\Admin\CharacteristicAdmin
-        arguments: [~, ShopBundle\Entity\Characteristic, SonataAdminBundle:CRUD]
-        tags:
-            - {name: sonata.admin, manager_type: orm, group: admin, label: Characteristic}

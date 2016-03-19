@@ -7,8 +7,8 @@ namespace ShopBundle\Admin;
  * Time: 20:57
  */
 
+use Application\Sonata\MediaBundle\Form\GalleryType;
 use ShopBundle\Entity\Product;
-use ShopBundle\Entity\ProductCharacteristic;
 use Sonata\AdminBundle\Admin\Admin;
 
 class ProductAdmin extends Admin{
@@ -22,16 +22,9 @@ class ProductAdmin extends Admin{
             ->add('slug')
             ->add('title')
             ->add('name')
-            ->add('description')
             ->add('shortDescription')
-            ->end()
-            ->with('Characteristic')
-            ->add('characteristic', 'sonata_type_collection',
-                array('by_reference' => false),
-                array(
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                ))
+            ->add('description', null, array('attr'=> array('class' => 'ckeditor')))
+            ->add('gallery', new GalleryType(), array('label' => false))
             ->end();
     }
 
@@ -46,9 +39,7 @@ class ProductAdmin extends Admin{
     {
         $listMapper
             ->add('name')
-            ->add('shortDescription')
             ->add('price')
-            ->add('gallery')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),

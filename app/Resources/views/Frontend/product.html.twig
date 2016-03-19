@@ -27,7 +27,7 @@
             <div class="image-block">
                 <div class="main-image">
                     {% set firstGalleryHasMedia = gallery.galleryHasMedias.first %}
-                    <img src="{% path firstGalleryHasMedia.media, 'big' %}" alt="{{firstGalleryHasMedia.media.description}}" class="custom">
+                    <img src="{% path firstGalleryHasMedia.media, 'big' %}" alt="{{firstGalleryHasMedia.media.description |raw}}" class="custom">
                 </div>
                 <ul class="thumbnails">
                     {% for galleryHasMedia in gallery.galleryHasMedias %}

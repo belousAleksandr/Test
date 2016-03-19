@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Admin;
 
+use Application\Sonata\MediaBundle\Form\GalleryType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -30,7 +31,6 @@ class CategoryAdmin extends Admin
         $listMapper
             ->add('enabled')
             ->add('title')
-            ->add('description')
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'show' => array(),
@@ -52,7 +52,8 @@ class CategoryAdmin extends Admin
             ->add('title')
             ->add('name')
             ->add('shortDescription')
-            ->add('description')
+            ->add('description', null, array('attr'=> array('class' => 'ckeditor')))
+            ->add('gallery', new GalleryType(), array('label' => false))
         ;
     }
 

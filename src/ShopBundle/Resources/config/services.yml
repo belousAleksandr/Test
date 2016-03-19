@@ -1,2 +1,18 @@
 services:
+    shop.twig_extension.admin_help:
+        class: ShopBundle\Twig\Extension\AdminHelpExtension
+        public: false
+        arguments: [@sonata.admin.pool]
+        tags:
+            - { name: twig.extension }
 
+    custom_name.admin.media:
+        class: %sonata.media.admin.media.class%
+        arguments:
+            - ~
+            - %sonata.media.admin.media.entity%
+            - %sonata.media.admin.media.controller%
+            - @sonata.media.pool
+            - @sonata.classification.manager.category
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Media, show_in_dashboard: false}

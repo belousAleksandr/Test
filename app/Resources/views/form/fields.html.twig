@@ -1,0 +1,205 @@
+{% block gallery_row %}
+    <style>
+        ul.gallery {
+            list-style: none;
+        }
+
+        ul.gallery li {
+            display: block;
+            position: relative;
+            float: left;
+            overflow: hidden;
+            margin: 2px;
+            border: 2px solid #333;
+        }
+        ul.gallery li div {
+            display: none;
+        }
+
+        ul.gallery li:hover {
+            color: #23527c;
+            text-decoration: underline;
+        }
+
+        ul.gallery li:hover div.tools {
+            display: block;
+        }
+        div.tools{
+            top: auto;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: auto;
+            height: 28px;
+            vertical-align: middle;
+            position: absolute;
+            text-align: center;
+            background-color: rgba(0,0,0,.55);
+        }
+    </style>
+    {% set admin = sonata_admin.admin %}
+    {% set mediaAdmin = getAdmin("custom_name.admin.media")%}
+    {% do mediaAdmin.setRequest(app.request)%}
+    {% set object = admin.subject %}
+    {% set gallery = object.gallery %}
+    <div id="sonata-ba-field-container-{{ form.vars.id }}" class="form-group"
+            data-href-create="{{ mediaAdmin.generateUrl('create', {'parentCode': admin.code, 'parentId': object.id, 'provider': 'sonata.media.provider.image'}) }}"
+            data-parent-admin="{{ admin.code}}"
+            data-parent-object-id="{{ object.id}}"
+            >
+        {% if object.id %}
+            <ul class='gallery row'>
+                    {% for galleryHasMedias in gallery.galleryHasMedias  %}
+                        {% set media = galleryHasMedias.media %}
+                        <li class="item" data-id = "{{ media.id }}"
+                            data-href-edit="{{ mediaAdmin.generateUrl('edit', {'id': media.id, 'parentCode': admin.code, 'parentId': object.id}) }}"
+                            data-href-remove="{{ mediaAdmin.generateUrl('delete', {'id': media.id, 'parentCode': admin.code, 'parentId': object.id}) }}">
+
+
+                            {% thumbnail media, 'small' %}
+                            <div class="tools">
+                                <a class="{{ form.vars.id }}galleryEdit" href="#{{ form.vars.id }}galleryModal" role="button" data-toggle="modal">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="{{ form.vars.id }}galleryRemove" href="{{ form.vars.id }}galleryModal" role="button" data-toggle="modal">
+                                    <i class="fa fa-times red"></i>
+                                </a>
+                            </div>
+
+                        </li>
+                    {% endfor %}
+                {#<button type="button" class="btn btn-default">Default</button>#}
+                <a class="btn btn-default {{ form.vars.id }}galleryCreate" href="#" role="button">
+                    <i class="fa fa-plus fa-2x"></i>
+                </a>
+            </ul>
+            <script>
+
+                function getForm(event, a, action) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    var field_dialog_{{ id }}         = false;
+                    var field_dialog_content_{{ id }} = false;
+                    var field_dialog_title_{{ id }}   = false;
+                    function initialize_popup_{{ id }}() {
+                        // initialize component
+                        if (!field_dialog_{{ id }}) {
+                            field_dialog_{{ id }}         = jQuery("#field_dialog_{{ id }}");
+                            field_dialog_content_{{ id }} = jQuery(".modal-body", "#field_dialog_{{ id }}");
+                            field_dialog_title_{{ id }}   = jQuery(".modal-title", "#field_dialog_{{ id }}");
+
+                            // move the dialog as a child of the root element, nested form breaks html ...
+                            jQuery(document.body).append(field_dialog_{{ id }});
+                        }
+                    }
+                    initialize_popup_{{ id }}();
+                    var handleForm = function(event) {
+                                var element = jQuery(this);
+
+                                // return if the link is an anchor inside the same page
+                                if (this.nodeName == 'A' && (element.attr('href').length == 0 || element.attr('href')[0] == '#')) {
+                                    return;
+                                }
+
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                if (this.nodeName == 'FORM') {
+                                    var url = element.attr('action');
+                                    var type = element.attr('method');
+                                } else if (this.nodeName == 'A') {
+                                    var url = element.attr('href');
+                                    var type = 'GET';
+                                } else {
+                                    alert('unexpected element : @' + this.nodeName + '@');
+                                    return;
+                                }
+
+                                if (element.hasClass('sonata-ba-action')) {
+                                    Admin.log('[s56e06ecb362e2_galleryHasMedias_0_media|field_dialog_form_action] reserved action stop catch all events');
+                                    return;
+                                }
+
+                                var data = {
+                                    _xml_http_request: true,
+                                    provider: 'sonata.media.provider.image'
+                                };
+
+                                var form = jQuery(this);
+
+                                // the ajax post
+                                jQuery(form).ajaxSubmit({
+                                    url: url,
+                                    type: type,
+                                    data: data,
+                                    success: function (data) {
+                                        // if the crud action return ok, then the element has been added
+                                        // so the widget container must be refresh with the last option available
+                                        if (typeof data != 'string' && data.result == 'ok') {
+                                            field_dialog_{{ id }}.modal('hide');
+                                            location.reload();
+                                            return;
+                                        }
+                                        // populate the popup container
+                                        field_dialog_title_{{ id }}.html("{{ mediaAdmin.label|trans({}, mediaAdmin.translationdomain) }}");
+                                        field_dialog_{{ id }}.find('div.modal-body').html(data);
+
+                                        Admin.shared_setup(field_dialog_{{ id }});
+
+                                        // capture the submit event to make an ajax call, ie : POST data to the
+                                       // related create admin
+                                        jQuery('a', field_dialog_{{ id }}).on('click', handleForm);
+                                        jQuery('form', field_dialog_{{ id }}).on('submit', handleForm);
+                                        Admin.shared_setup(field_dialog_{{ id }});
+                                        Admin.setup_list_modal(field_dialog_{{ id }});
+                                    }
+                                });
+                            };
+                    // retrieve the form element from the related admin generator
+                    jQuery.ajax({
+                        url: action,
+                        dataType: 'html',
+                        success: function(html) {
+
+                            // populate the popup container
+                            field_dialog_title_{{ id }}.html("{{ mediaAdmin.label|trans({}, mediaAdmin.translationdomain) }}");
+                            field_dialog_{{ id }}.find('div.modal-body').html(html);
+
+                            Admin.shared_setup(field_dialog_{{ id }});
+
+                            // capture the submit event to make an ajax call, ie : POST data to the
+                            // related create admin
+                            jQuery('a', field_dialog_{{ id }}).on('click', handleForm);
+                            jQuery('form', field_dialog_{{ id }}).on('submit', handleForm);
+                            // open the dialog in modal mode
+                            field_dialog_{{ id }}.modal();
+                            Admin.setup_list_modal(field_dialog_{{ id }});
+                        }
+                    });
+
+
+                }
+                $('a.{{ form.vars.id }}galleryRemove').on('click', function(event){
+
+                    var a = $(this), action = a.closest('li.item').attr('data-href-remove');
+                    getForm(event, a, action);
+                });
+
+                $('a.{{ form.vars.id }}galleryEdit').on('click', function(event) {
+                    var a = $(this), action = a.closest('li.item').attr('data-href-edit');
+                    getForm(event, a, action);
+                });
+
+                $('a.{{ form.vars.id }}galleryCreate').on('click', function(event){
+                    var a = $(this), dataGroup = a.closest('div[data-href-create]'), action = dataGroup.attr('data-href-create');
+
+                    getForm(event, a, action);
+                });
+            </script>
+        {% else %}
+            <div class="alert alert-info">{{ admin.trans('Gallery will be available after the creation of the additional service') }}</div>
+        {% endif %}
+    </div>
+    {{ form_widget(form) }}
+    {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_modal.html.twig' %}
+{% endblock %}
