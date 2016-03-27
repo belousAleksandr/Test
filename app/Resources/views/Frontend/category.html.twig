@@ -24,8 +24,8 @@
                             {% thumbnail galleryHasMedias.media, 'small' %}
                         {% endif %}
                     {% endif %}
-                    <div class="short-description">
-                        {{product.shortDescription | raw |truncate(100)}}
+                    <div class="price">
+                        {{product.price |number_format(2)}} грн.
                     </div>
                 </a>
             </div>
@@ -33,7 +33,7 @@
 
     </div>
     <div class="wrap wrap-text wrap-default-color category-content">
-        <h1>{{ page.title }}</h1>
-        {{ page.description }}
+        <h1>{{ page.name }}</h1>
+        {{ page.description | raw }}
     </div>
 {% endblock %}

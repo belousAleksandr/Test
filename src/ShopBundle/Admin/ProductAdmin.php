@@ -22,7 +22,8 @@ class ProductAdmin extends Admin{
             ->add('slug')
             ->add('title')
             ->add('name')
-            ->add('shortDescription')
+            ->add('mKeywords')
+            ->add('mDescription')
             ->add('description', null, array('attr'=> array('class' => 'ckeditor')))
             ->add('gallery', new GalleryType(), array('label' => false))
             ->end();

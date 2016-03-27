@@ -58,6 +58,14 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
     private $mDescription;
 
     /**
+     * @var string $shortDescription
+     *
+     * @ORM\Column(name="m_keywords", type="string")
+     * @Gedmo\Translatable
+     */
+    protected $mKeywords;
+
+    /**
      * @var string $description
      *
      * @ORM\Column(name="content", type="text")
@@ -180,4 +188,27 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
         return $this;
     }
 
+
+    /**
+     * Set mKeywords
+     *
+     * @param string $mKeywords
+     * @return Page
+     */
+    public function setMKeywords($mKeywords)
+    {
+        $this->mKeywords = $mKeywords;
+
+        return $this;
+    }
+
+    /**
+     * Get mKeywords
+     *
+     * @return string 
+     */
+    public function getMKeywords()
+    {
+        return $this->mKeywords;
+    }
 }

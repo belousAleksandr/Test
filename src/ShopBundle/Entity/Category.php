@@ -89,10 +89,18 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     /**
      * @var string $shortDescription
      *
-     * @ORM\Column(name="short_description", type="text")
+     * @ORM\Column(name="m_description", type="string")
      * @Gedmo\Translatable
      */
-    protected $shortDescription;
+    protected $mDescription;
+
+    /**
+     * @var string $shortDescription
+     *
+     * @ORM\Column(name="m_keywords", type="string")
+     * @Gedmo\Translatable
+     */
+    protected $mKeywords;
 
     /**
      * @ORM\OneToMany(
@@ -154,26 +162,6 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
         $this->description = $description;
         return $this;
     }
-
-    /**
-     * @return string
-     */
-    public function getShortDescription()
-    {
-        return $this->shortDescription;
-    }
-
-    /**
-     * @param string $shortDescription
-     * @return Category
-     */
-    public function setShortDescription($shortDescription)
-    {
-        $this->shortDescription = $shortDescription;
-        return $this;
-    }
-
-
 
     /**
      * @return Gallery
@@ -320,5 +308,51 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set mDescription
+     *
+     * @param string $mDescription
+     * @return Category
+     */
+    public function setMDescription($mDescription)
+    {
+        $this->mDescription = $mDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get mDescription
+     *
+     * @return string 
+     */
+    public function getMDescription()
+    {
+        return $this->mDescription;
+    }
+
+    /**
+     * Set mKeywords
+     *
+     * @param string $mKeywords
+     * @return Category
+     */
+    public function setMKeywords($mKeywords)
+    {
+        $this->mKeywords = $mKeywords;
+
+        return $this;
+    }
+
+    /**
+     * Get mKeywords
+     *
+     * @return string 
+     */
+    public function getMKeywords()
+    {
+        return $this->mKeywords;
     }
 }

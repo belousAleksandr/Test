@@ -16,9 +16,11 @@ div.product-thumb h3{
     margin: 0 0 20px 0;
 }
 
-div.product-thumb div.short-description {
-    text-align: justify;
+div.product-thumb div.price {
+    text-align: right;
+    font-size: 22px;
     margin-top:20px;
+    color: #950000;
 }
 div.product-thumb {
     width: 310px;
@@ -48,6 +50,6 @@ div.product-thumb img{
     color: black;
 }
 .category-content{
-    color: #999;
+    color: #747474;
     text-align: justify;
 }

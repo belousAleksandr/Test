@@ -48,8 +48,8 @@ class PageAdmin extends Admin
              ->add('key')
              ->add('title')
              ->add('name')
-             ->add('mDescription')
-//            ->add('rawContent', 'text') // source content
+            ->add('mKeywords')
+            ->add('mDescription')
             ->add('content', null, array(
                 'attr' => array('class' => 'ckeditor')
 //                'source_field' => 'rawContent',
