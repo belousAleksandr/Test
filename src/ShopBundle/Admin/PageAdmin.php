@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Admin;
 
+use Application\Sonata\MediaBundle\Form\GalleryType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -52,19 +53,8 @@ class PageAdmin extends Admin
             ->add('mDescription')
             ->add('content', null, array(
                 'attr' => array('class' => 'ckeditor')
-//                'source_field' => 'rawContent',
-//                'target_field' => 'content'
             ))
-//             ->add('content', 'sonata_formatter_type', array(
-//                 'event_dispatcher' => $formBuilder->getEventDispatcher(),
-//                 'format_field'   => 'contentFormatter',
-//                 'source_field'   => 'content',
-//                 'source_field_options'      => array(
-//                     'attr' => array('class' => 'span10', 'rows' => 20)
-//                 ),
-//                 'listener'       => true,
-//                 'target_field'   => 'content'
-//             ))
+            ->add('gallery', new GalleryType(), array('label' => false))
         ;
     }
 

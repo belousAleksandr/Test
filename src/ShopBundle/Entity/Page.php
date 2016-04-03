@@ -2,6 +2,7 @@
 
 namespace ShopBundle\Entity;
 
+use Application\Sonata\MediaBundle\Entity\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Sonata\TranslationBundle\Model\Gedmo\AbstractPersonalTranslatable;
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity
  * @Gedmo\TranslationEntity(class="ShopBundle\Entity\Translations\PageTranslation")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Page extends AbstractPersonalTranslatable implements TranslatableInterface
 {
@@ -82,6 +84,11 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
      * @Assert\Valid(deep = true)
      */
     protected $translations;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
+     */
+    private $gallery;
 
     /**
      * Get id
@@ -210,5 +217,40 @@ class Page extends AbstractPersonalTranslatable implements TranslatableInterface
     public function getMKeywords()
     {
         return $this->mKeywords;
+    }
+
+
+    /**
+     * @return Gallery
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
+    }
+
+    /**
+     * @param mixed $gallery
+     * @return $this
+     */
+    public function setGallery($gallery)
+    {
+        $this->gallery = $gallery;
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist()
+    {
+        if (is_null($this->getGallery())) {
+            $gallery = new Gallery();
+            $gallery->setEnabled(true);
+            $gallery->setName($this->getTitle());
+            $gallery->setContext("default");
+            $gallery->setDefaultFormat("default_big");
+            $this->setGallery($gallery);
+        }
     }
 }

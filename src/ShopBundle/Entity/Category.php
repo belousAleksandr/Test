@@ -116,16 +116,7 @@ class Category extends AbstractPersonalTranslatable implements TranslatableInter
      * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Gallery", cascade={"persist", "remove"})
      */
     private $gallery;
-
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->translations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+    
 
     /**
      * @return string
