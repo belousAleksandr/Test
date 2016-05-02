@@ -47,7 +47,7 @@
             data-parent-admin="{{ admin.code}}"
             data-parent-object-id="{{ object.id}}"
             >
-        {% if object.id %}
+        {% if object.id and gallery %}
             <ul class='gallery row'>
                     {% for galleryHasMedias in gallery.galleryHasMedias  %}
                         {% set media = galleryHasMedias.media %}

@@ -6,6 +6,8 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css" media="all">
     {% endblock %}
+    <meta name="keywords" content="{% block mKeywords %}{{page.mKeywords}}{% endblock %}">
+    <meta name="description" content="{% block mDescription %}{{page.mDescription}}{% endblock %}">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
